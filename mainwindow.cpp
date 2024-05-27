@@ -32,11 +32,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_startButton_clicked()
-{
-    timer->start(16); // Aproximadamente 60 FPS
-}
-
 void MainWindow::on_addPiedraButton_clicked()
 {
     if (piedras.size() < 5) {
@@ -70,7 +65,6 @@ void MainWindow::on_addPapelButton_clicked()
     }
 }
 
-
 void MainWindow::on_addJugadorButton_clicked()
 {
     if (!jugadorActivo) {
@@ -78,16 +72,15 @@ void MainWindow::on_addJugadorButton_clicked()
         jugador->setPos(scene->width() / 2, scene->height() / 2);
         scene->addItem(jugador);
         jugadorActivo = true;
-        countdownTime = 300; // 5 minutes countdown
-        countdownTimer->start(1000); // 1-second intervals
+        countdownTime = 300;
+        countdownTimer->start(1000);
 
-        // Disable buttons
         ui->addPiedraButton->setEnabled(false);
         ui->addTijerasButton->setEnabled(false);
         ui->addPapelButton->setEnabled(false);
         ui->addJugadorButton->setEnabled(false);
 
-        spawnTimer->start(10000); // Create objects every 10 seconds
+        spawnTimer->start(10000);
     }
 }
 
@@ -103,11 +96,9 @@ void MainWindow::updateGame()
         papel->moveDiagonally();
     }
     if (jugadorActivo) {
-        // Implement this method in the Jugador class
         jugador->move();
     }
 
-    // Check collisions and update scores
     checkCollisions();
 }
 
@@ -167,10 +158,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
 void MainWindow::checkCollisions()
 {
-    // Aquí se implementa la detección de colisiones y la lógica para destruir objetos
-    // y actualizar los puntajes según las reglas de piedra, papel, tijeras.
 
-    // Ejemplo de lógica de colisión:
     for (Piedra *piedra : qAsConst(piedras)) {
         for (Tijeras *tijera : qAsConst(tijeras)) {
             if (piedra->collidesWithItem(tijera)) {
@@ -204,5 +192,9 @@ void MainWindow::checkCollisions()
         }
     }
 
-    // También se debe implementar la colisión con el jugador y actualizar puntajes.
+}
+
+void MainWindow::on_start_clicked()
+{
+    timer-> start(16);
 }
