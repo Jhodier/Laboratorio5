@@ -22,7 +22,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_startButton_clicked();
     void on_addPiedraButton_clicked();
     void on_addTijerasButton_clicked();
     void on_addPapelButton_clicked();
@@ -30,6 +29,7 @@ private slots:
     void updateGame();
     void spawnObjects();
     void updateCountdown();
+    void on_start_clicked();
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;
